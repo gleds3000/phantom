@@ -13,11 +13,11 @@
 
 "use strict";
 function waitFor(testFx, onReady, timeOutMillis) {
-    var maxtimeOutMillis = timeOutMillis ? timeOutMillis : 9000, //< Default Max Timout is 3s
-        start = new Date().getTime(),
+    var maxtimeOutMillis = timeOutMillis ? timeOutMillis : 50000, //< Default Max Timout is 3s
+        start = Date.now()//new Date().getTime(),
         condition = false,
         interval = setInterval(function() {
-            if ( (new Date().getTime() - start < maxtimeOutMillis) && !condition ) {
+            if ( (Date.now() - start < maxtimeOutMillis) && !condition ) {
                 // If not time-out yet and condition not yet fulfilled
                 condition = (typeof(testFx) === "string" ? eval(testFx) : testFx()); //< defensive code
             } else {
@@ -27,19 +27,19 @@ function waitFor(testFx, onReady, timeOutMillis) {
                     phantom.exit(1);
                 } else {
                     // Condition fulfilled (timeout and/or condition is 'true')
-                    console.log("'waitFor()' finished in " + (new Date().getTime() - start) + "ms.");
+                    console.log("'waitFor()' finished in " + (Date.now() - start) + "ms.");
                     typeof(onReady) === "string" ? eval(onReady) : onReady(); //< Do what it's supposed to do once the condition is fulfilled
                     clearInterval(interval); //< Stop this interval
                 }
             }
-        }, 250); //< repeat check every 250ms
+        }, 4000); //< repeat check every 4000ms
 };
 
 
 var page = require('webpage').create();
 
 // Open Twitter on 'sencha' profile and, onPageLoad, do...
-page.open("http://twitter.com/#!/gleds3000", function (status) {
+page.open("http://10.113.65.82/dashboard?id=carrefour.corporativo.frontend", function (status) {
     // Check for page load success
     if (status !== "success") {
         console.log("Unable to access network");
@@ -48,7 +48,7 @@ page.open("http://twitter.com/#!/gleds3000", function (status) {
         waitFor(function() {
             // Check in the page if a specific element is now visible
             return page.evaluate(function() {
-                return $("#signin-dropdown").is(":visible");
+                return $("#global-container").is(":visible");
             });
         }, function() {
            console.log("The sign-in dialog should be visible now.");

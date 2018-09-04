@@ -5,7 +5,7 @@ var fullLoad = function(anUrl, callbackDone) {
         ph.createPage(function (page) {
             page.open(anUrl, function (status) {
                 if (status !== 'success') {
-                    console.error("pahtom: error opening " + anUrl, status);
+                    console.error("phantom: error opening " + anUrl, status);
                     ph.exit();
                 } else {
                     // timeOut
@@ -27,4 +27,4 @@ var callback = function(htmlBody) {
     // do smth with the htmlBody
 }
 
-fullLoad('your/url/', callback);
+fullLoad('http://10.113.65.82/dashboard?id=carrefour.corporativo.frontend', callback);
