@@ -19,7 +19,12 @@ function waitFor(testFx, onReady, timeOutMillis) {
         interval = setInterval(function() {
             if ( (Date.now() - start < maxtimeOutMillis) && !condition ) {
                 // If not time-out yet and condition not yet fulfilled
+                console.log(testFx);
+                console.log(onReady);
+                console.log(timeOutMillis);
                 condition = (typeof(testFx) === "string" ? eval(testFx) : testFx()); //< defensive code
+                console.log(condition);
+                console.log("saiu aqui 1");
             } else {
                 if(!condition) {
                     // If condition still not fulfilled (timeout but condition is 'false')
@@ -35,10 +40,9 @@ function waitFor(testFx, onReady, timeOutMillis) {
         }, 4000); //< repeat check every 4000ms
 };
 
-
 var page = require('webpage').create();
 
-// Open Twitter on 'sencha' profile and, onPageLoad, do...
+// abrindo a pagina
 page.open("http://10.113.65.82/dashboard?id=carrefour.corporativo.frontend", function (status) {
     // Check for page load success
     if (status !== "success") {
@@ -48,7 +52,7 @@ page.open("http://10.113.65.82/dashboard?id=carrefour.corporativo.frontend", fun
         waitFor(function() {
             // Check in the page if a specific element is now visible
             return page.evaluate(function() {
-                return $("#global-container").is(":visible");
+                return $("[DIV].style.visibility").is(":visible");
             });
         }, function() {
            console.log("The sign-in dialog should be visible now.");

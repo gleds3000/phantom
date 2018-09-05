@@ -10,16 +10,6 @@ function onPageReady() {
     page.render('foto.png');
 //gravar conteudo em um arquivo.html abrir ele novamente e printar...
 
-var fs = require('fs');
-
-fs.writeFile("meuarquivo.html", htmlContent , function(erro) {
-
-    if(erro) {
-        throw erro;
-    }
-
-    console.log("Arquivo salvo");
-}); 
 
 /**/
 

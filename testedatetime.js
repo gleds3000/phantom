@@ -1,10 +1,12 @@
-/*
-start = Date.now()//new Date().getTime(),
-end = new Date().getTime()
 
-console.log(start);
-console.log(end);
-*/
+//start = Date.now()//new Date().getTime(),
+//end = new Date().getTime()
+
+console.log(new Intl.NumberFormat('en').format(Date.now()));
+
+//console.log(start);
+//console.log(end);
+/*
 var webPage = require('webpage');
 var page = webPage.create();
 
@@ -21,6 +23,6 @@ page.open('https://github.com/', function(status) {
 
 });
 
-
+*/
 
 //phantom.exit(1);
